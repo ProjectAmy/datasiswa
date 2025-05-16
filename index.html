@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Daftar Siswa</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
 </head>
 <body>
   <h2>📚 Daftar Siswa</h2>
@@ -21,10 +20,12 @@
     </tbody>
   </table>
 
-  <script>
-    const supabaseUrl = 'https://cbsumeskkxyfxtzyjtsg.supabase.co'; // Ganti dengan project URL kamu
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNic3VtZXNra3h5Znh0enlqdHNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0MzM3OTIsImV4cCI6MjA2MzAwOTc5Mn0.1QrnTqKHBqjr3Pplhxxub2fiiaG8C5CxxqwZ12Dova8'; // Ganti dengan anon key kamu
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'https://cbsumeskkxyfxtzyjtsg.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNic3VtZXNra3h5Znh0enlqdHNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0MzM3OTIsImV4cCI6MjA2MzAwOTc5Mn0.1QrnTqKHBqjr3Pplhxxub2fiiaG8C5CxxqwZ12Dova8';
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     async function loadSiswa() {
       const { data, error } = await supabase
@@ -50,6 +51,9 @@
         tbody.appendChild(tr);
       });
     }
+
+    // agar bisa dipanggil dari onclick di tombol
+    window.loadSiswa = loadSiswa;
   </script>
 </body>
 </html>
